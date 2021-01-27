@@ -5,17 +5,16 @@ module.exports = (app) => {
   const user = app.model.define(
     'user',
     {
-      id: {
-        type: INTEGER(11),
-        primaryKey: true,
-      },
       nickname: STRING(100),
       avatar_url: STRING(1000),
       gender: INTEGER(1),
       province: STRING(100),
       city: STRING(100),
       country: STRING(100),
-      openid: STRING(100),
+      openid: {
+        type: STRING(100),
+        primaryKey: true,
+      },
     },
     {
       freezeTableName: true,
@@ -32,15 +31,16 @@ module.exports = (app) => {
  * 用户表:MYSQL
  *
  #
-CREATE TABLE eggTest.`user` (
+CREATE TABLE loginTest.`user` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `nickname` varchar(100) DEFAULT NULL COMMENT '用户名',
-`avatarUrl` varchar(100) DEFAULT NULL COMMENT '头像地址',
+`avatar_url` varchar(1000) DEFAULT NULL COMMENT '头像地址',
 `gender` int(1) DEFAULT NULL COMMENT '性别',
 `province`  varchar(100) DEFAULT NULL COMMENT '省份',
 `city` varchar(100) DEFAULT NULL COMMENT '城市',
 `country` varchar(100) DEFAULT NULL COMMENT '国家',
- PRIMARY KEY (`id`)
+`openid` varchar(100) DEFAULT NULL COMMENT 'openid',
+ PRIMARY KEY (`openid`)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4

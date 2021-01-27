@@ -17,8 +17,8 @@ class HomeController extends Controller {
 
   async login() {
     const { ctx } = this;
-    const { code, userInfo } = ctx.request.body;
-    const { nickName, avatarUrl, gender, province, city, country } = userInfo;
+    const { code } = ctx.request.body;
+    // const { nickName, avatarUrl, gender, province, city, country } = userInfo;
 
     // 服务器根据客户端传来的code向微信接口服务获取session_key和openid
     const res = await ctx.curl(
@@ -33,26 +33,39 @@ class HomeController extends Controller {
     // console.log(skey);
 
     const { openid } = res.data;
+    let userExist = false;
 
-    // 将用户信息记录到数据库中
-    await ctx.model.User.create({
-      nickname: nickName,
-      avatar_url: avatarUrl,
-      gender: gender,
-      province: province,
-      city: city,
-      country: country,
-      openid: openid,
-    });
+    // 根据openid查找用户信息
+    const user = await ctx.model.User.findByPk(openid);
+
+    console.log(user);
+
+    if (user === null) {
+      console.log('当前用户是新用户');
+
+      // 将用户信息记录到数据库中
+      await ctx.model.User.create({
+        openid: openid,
+      });
+    } else {
+      console.log('当前用户是老用户');
+      userExist = true;
+    }
 
     // 根据用户的openid生成token
     const token = jwt.encode(openid, SECRET);
 
     // 将token返回
-    ctx.body = token;
+    ctx.body = {
+      token: token,
+      userExist: userExist,
+      userInfo: user,
+    };
   }
 
   async request() {
+    console.log('请求');
+
     const { ctx } = this;
 
     // 从请求头的authorization字段获取token
@@ -70,6 +83,36 @@ class HomeController extends Controller {
 
     // 之后注意要将openid属性去掉，私密属性不传回给客户端
     ctx.body = res;
+  }
+
+  async userInfo() {
+    const { ctx } = this;
+    const { userInfo } = ctx.request.body;
+    console.log(userInfo);
+
+    // 从请求头的authorization字段获取token
+    const token = ctx.get('authorization');
+
+    // 对token进行解密获取其中的openid
+    const openid = jwt.decode(token, SECRET);
+
+    // 获取请求体信息
+    const { nickName, avatarUrl, gender, province, city, country } = userInfo;
+
+    // 根据openid查找用户信息
+    const user = await ctx.model.User.findByPk(openid);
+
+    // 更新用户信息
+    await user.update({
+      nickname: nickName,
+      avatar_url: avatarUrl,
+      gender,
+      province,
+      city,
+      country,
+    });
+
+    ctx.status = 200;
   }
 }
 
