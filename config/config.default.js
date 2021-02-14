@@ -24,7 +24,7 @@ module.exports = app => {
     dialect: 'mysql',
     host: 'localhost',
     port: 3306,
-    database: 'logintest',
+    database: 'miniprogram',
     username: 'root',
     password: '1999125ZZR',
   };

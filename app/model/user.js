@@ -31,19 +31,18 @@ module.exports = (app) => {
  * 用户表:MYSQL
  *
  #
-CREATE TABLE loginTest.`user` (
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`nickname` varchar(100) DEFAULT NULL COMMENT '用户名',
-`avatar_url` varchar(1000) DEFAULT NULL COMMENT '头像地址',
-`gender` int(1) DEFAULT NULL COMMENT '性别',
-`province`  varchar(100) DEFAULT NULL COMMENT '省份',
-`city` varchar(100) DEFAULT NULL COMMENT '城市',
-`country` varchar(100) DEFAULT NULL COMMENT '国家',
-`openid` varchar(100) DEFAULT NULL COMMENT 'openid',
- PRIMARY KEY (`openid`)
+create table user (
+	openid varchar(100) not null comment openid,
+	nickname varchar(100) default null comment '昵称',
+	avatar_url varchar(1000) default null comment '头像地址',
+	gender int(1) default 0 comment '性别',
+	province varchar(30) default null comment '省份',
+	city varchar(30) default null comment '城市',
+	country varchar(30) default null comment '国家',
+	primary key openid
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
-COLLATE=utf8mb4_0900_ai_ci
-COMMENT='eggTest用户信息';
+COLLATE=utf8mb4_general_ci
+COMMENT='古诗词小程序';
 */

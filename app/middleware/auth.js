@@ -1,20 +1,36 @@
-let jwt = require('jwt-simple');
+const jwt = require('jwt-simple');
 const SECRET = 'zhuoran';
 
 module.exports = (options) => {
   return async function auth(ctx, next) {
-    const token = ctx.get('authorization');
+    let token = ctx.get('authorization');
 
     if (token) {
       console.log('请求带有token');
+
+      if (token.includes('Bearer')) {
+        token = token.replace(/Bearer\s*/, '');
+      }
+
+      // 记录token是否成功解析
+      let flag = false;
+
       try {
         const openid = jwt.decode(token, SECRET);
-        await next();
+        flag = true;
+        ctx.locals.openid = openid;
       } catch (err) {
+        console.log(err);
+        console.log('here!');
         ctx.status = 401;
         ctx.body = {
           msg: 'token有误',
         };
+      }
+
+      // 防止catch无法捕获token解析错误
+      if (flag) {
+        await next();
       }
     } else {
       console.log('请求没有带token');

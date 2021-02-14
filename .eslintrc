@@ -12,10 +12,7 @@
     }
   },
   "rules": {
-    "indent": [
-      "error",
-      2
-    ],
+    "indent": "off",
     "new-cap": "off",
     "newline-after-var": "off",
     "no-invalid-this": "off",

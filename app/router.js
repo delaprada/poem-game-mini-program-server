@@ -3,7 +3,13 @@ module.exports = (app) => {
   const auth = middleware.auth();
 
   router.get('/', controller.home.index);
-  router.get('/request', auth, controller.home.request);
-  router.post('/login', controller.home.login);
-  router.post('/userInfo', controller.home.userInfo);
+  // router.get('/request', auth, controller.home.request);
+
+  router.get('/sentence', controller.home.getSentence);
+  router.get('/recommend', controller.home.getRecommend);
+
+  router.post('/login', controller.user.login);
+  router.post('/postInfo', controller.user.postInfo);
+
+  router.get('/personal', auth, controller.personal.getPersonalInfo);
 };

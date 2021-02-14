@@ -1,13 +1,7 @@
 const Controller = require('egg').Controller;
 const jwt = require('jwt-simple');
-// const crypto = require('crypto');
 
 const SECRET = 'zhuoran';
-
-// 使用sha1算法生成skey
-// function encryptSha1(data) {
-//   return crypto.createHash('sha1').update(data, 'utf8').digest('hex');
-// }
 
 class HomeController extends Controller {
   async index() {
@@ -15,104 +9,18 @@ class HomeController extends Controller {
     ctx.body = 'hi, egg';
   }
 
-  async login() {
+  async getSentence() {
     const { ctx } = this;
-    const { code } = ctx.request.body;
-    // const { nickName, avatarUrl, gender, province, city, country } = userInfo;
+    const res = await ctx.service.home.findSentence();
 
-    // 服务器根据客户端传来的code向微信接口服务获取session_key和openid
-    const res = await ctx.curl(
-      `https://api.weixin.qq.com/sns/jscode2session?appid=wx6936c18b38186cf3&secret=d11f77fb7d5a959b6ba46c30dbd4da95&js_code=${code}&grant_type=authorization_code`,
-      {
-        dataType: 'json',
-      }
-    );
-
-    // const { session_key } = res.data;
-    // const skey = encryptSha1(session_key);
-    // console.log(skey);
-
-    const { openid } = res.data;
-    let userExist = false;
-
-    // 根据openid查找用户信息
-    const user = await ctx.model.User.findByPk(openid);
-
-    console.log(user);
-
-    if (user === null) {
-      console.log('当前用户是新用户');
-
-      // 将用户信息记录到数据库中
-      await ctx.model.User.create({
-        openid: openid,
-      });
-    } else {
-      console.log('当前用户是老用户');
-      userExist = true;
-    }
-
-    // 根据用户的openid生成token
-    const token = jwt.encode(openid, SECRET);
-
-    // 将token返回
-    ctx.body = {
-      token: token,
-      userExist: userExist,
-      userInfo: user,
-    };
-  }
-
-  async request() {
-    console.log('请求');
-
-    const { ctx } = this;
-
-    // 从请求头的authorization字段获取token
-    const token = ctx.get('authorization');
-
-    // 对token进行解密获取其中的openid
-    const openid = jwt.decode(token, SECRET);
-
-    // 根据openid查找用户信息
-    const res = await ctx.model.User.findAll({
-      where: {
-        openid: openid,
-      },
-    });
-
-    // 之后注意要将openid属性去掉，私密属性不传回给客户端
     ctx.body = res;
   }
 
-  async userInfo() {
+  async getRecommend() {
     const { ctx } = this;
-    const { userInfo } = ctx.request.body;
-    console.log(userInfo);
+    const res = await ctx.service.home.findRecommend();
 
-    // 从请求头的authorization字段获取token
-    const token = ctx.get('authorization');
-
-    // 对token进行解密获取其中的openid
-    const openid = jwt.decode(token, SECRET);
-
-    // 获取请求体信息
-    const { nickName, avatarUrl, gender, province, city, country } = userInfo;
-
-    // 根据openid查找用户信息
-    const user = await ctx.model.User.findByPk(openid);
-
-    // 更新用户信息
-    await user.update({
-      nickname: nickName,
-      avatar_url: avatarUrl,
-      gender,
-      province,
-      city,
-      country,
-    });
-
-    ctx.status = 200;
+    ctx.body = res;
   }
 }
 
