@@ -17,4 +17,7 @@ module.exports = (app) => {
   // 获取诗词详情
   router.get('/poem', controller.poem.getPoem);
   router.get('/author', controller.poem.getAuthor);
+  router.get('/dynamic', auth, controller.poem.getDynamic);
+  router.post('/like', auth, controller.poem.like); //喜爱
+  router.post('/collect', auth, controller.poem.collect); // 收藏
 };

@@ -135,18 +135,17 @@ class personalService extends Service {
     // 获取详细诗词信息
     res = await Promise.all(
       res.map(async (item) => {
-        const { id, category } = item.dataValues;
-        const detail = await this.getDetail(id, category);
+        const { composition_id, category } = item.dataValues;
+        const detail = await this.getDetail(composition_id, category);
 
         // 浅拷贝 不影响源对象
         let newItem = JSON.parse(JSON.stringify(item));
         newItem.detail = detail[0].dataValues;
+        newItem.detail.category = category;
 
         return newItem;
       })
     );
-
-    console.log(res);
 
     return res;
   }
