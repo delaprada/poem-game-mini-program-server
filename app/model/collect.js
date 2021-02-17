@@ -5,14 +5,13 @@ module.exports = (app) => {
   const collect = app.model.define(
     'collect',
     {
-      openid: {
-        type: STRING(100),
-        primaryKey: true,
-      },
-      composition_id: {
+      id: { 
         type: INTEGER(11),
         primaryKey: true,
-      }
+      },
+      openid: STRING(100),
+      composition_id: INTEGER(11),
+      category: INTEGER(1),
     },
     {
       freezeTableName: true,

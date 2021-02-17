@@ -8,6 +8,9 @@ class UserController extends Controller {
 
     const info = await ctx.service.user.getToken(code);
 
+    console.log('info为！');
+    console.log(info);
+
     // 将token信息返回
     ctx.body = info;
   }
