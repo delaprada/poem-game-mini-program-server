@@ -20,4 +20,10 @@ module.exports = (app) => {
   router.get('/dynamic', auth, controller.poem.getDynamic);
   router.post('/like', auth, controller.poem.like); //喜爱
   router.post('/collect', auth, controller.poem.collect); // 收藏
+
+  // 获取诗人详细信息
+  router.get('/author/list', controller.poet.getAuthorList);
+
+  // 获取诗词列表信息
+  router.get('/poemList', controller.poemList.getPoemList);
 };
