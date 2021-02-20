@@ -13,6 +13,7 @@ module.exports = (app) => {
   router.post('/postInfo', controller.user.postInfo); // 提交用户个人信息
 
   router.get('/personal', auth, controller.personal.getPersonalInfo); // 获取用户个人信息（包括喜爱和收藏）
+  router.get('/personal/list', auth, controller.personal.getPersonalList); // 获取用户喜爱/收藏/作品列表
 
   // 获取诗词详情
   router.get('/poem', controller.poem.getPoem);

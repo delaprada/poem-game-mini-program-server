@@ -36,6 +36,75 @@ class personalService extends Service {
     };
   }
 
+  async getLikeList() {
+    const { ctx } = this;
+
+    // 从单次请求变量中拿token避免重复解析步骤
+    const openid = ctx.locals.openid;
+
+    let res = await ctx.model.Like.findAll({
+      where: {
+        openid: openid,
+      },
+    });
+
+    // 获取详细诗词信息
+    res = await Promise.all(
+      res.map(async (item) => {
+        const { composition_id, category } = item.dataValues;
+        const detail = await this.getDetail(composition_id, category);
+        const newItem = detail[0].dataValues;
+        newItem.category = category;
+
+        return newItem;
+      })
+    );
+
+    return res;
+  }
+
+  async getCollectList() {
+    const { ctx } = this;
+
+    // 从单次请求变量中拿token避免重复解析步骤
+    const openid = ctx.locals.openid;
+
+    let res = await ctx.model.Collect.findAll({
+      where: {
+        openid: openid,
+      },
+    });
+
+    // 获取详细诗词信息
+    res = await Promise.all(
+      res.map(async (item) => {
+        const { composition_id, category } = item.dataValues;
+        const detail = await this.getDetail(composition_id, category);
+        const newItem = detail[0].dataValues;
+        newItem.category = category;
+
+        return newItem;
+      })
+    );
+
+    return res;
+  }
+
+  async getCompoList() {
+    const { ctx } = this;
+
+    // 从单次请求变量中拿token避免重复解析步骤
+    const openid = ctx.locals.openid;
+
+    let res = await ctx.model.Record.findAll({
+      where: {
+        openid: openid,
+      },
+    });
+
+    return res;
+  }
+
   async getLikeAmount(openid) {
     const { ctx, app } = this;
     const sequelize = app.Sequelize;

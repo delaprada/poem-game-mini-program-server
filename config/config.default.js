@@ -22,11 +22,11 @@ module.exports = app => {
   // sequelize配置
   config.sequelize = {
     dialect: 'mysql',
-    host: 'localhost',
+    host: '127.0.0.1',
     port: 3306,
     database: 'miniprogram',
     username: 'root',
-    password: '1999125ZZR',
+    password: '123456', // 本地数据库密码为1999125ZZR 远程服务器数据库密码为123456
   };
 
   // csrf配置先设定为false
