@@ -27,4 +27,7 @@ module.exports = (app) => {
 
   // 获取诗词列表信息
   router.get('/poemList', controller.poemList.getPoemList);
+
+  // 获取搜索结果
+  router.get('/search', controller.search.getSearchResult);
 };

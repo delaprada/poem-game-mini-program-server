@@ -13,6 +13,7 @@ module.exports = (app) => {
       name: STRING(100),
       intro_l: TEXT,
       intro_s: TEXT,
+      dynasty: STRING(100),
     },
     {
       freezeTableName: true,

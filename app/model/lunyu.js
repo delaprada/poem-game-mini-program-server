@@ -12,6 +12,7 @@ module.exports = (app) => {
       },
       chapter: STRING(100),
       content: TEXT,
+      category: INTEGER(1),
     },
     {
       freezeTableName: true,

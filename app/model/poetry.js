@@ -14,6 +14,7 @@ module.exports = (app) => {
       title: STRING(100),
       content: TEXT,
       author: STRING(100),
+      category: INTEGER(1),
     },
     {
       freezeTableName: true,

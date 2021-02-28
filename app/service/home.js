@@ -21,13 +21,14 @@ class HomeService extends Service {
       { type: QueryTypes.SELECT }
     );
 
+    console.log(res);
+
     // 取前15首
     res = res.slice(0, 15);
 
     // 获取喜爱和收藏总数最多的前15首对应的诗句
     res = await Promise.all(
       res.map(async (item) => {
-        console.log(item);
         const { composition_id, category, count } = item;
         const detail = await this.getDetail(composition_id, category);
         detail.hot = count;
@@ -49,7 +50,8 @@ class HomeService extends Service {
             id: id,
           },
         });
-        return res[0].dataValues;
+        console.log(res);
+        return res[0];
       }
       case 1: {
         const res = await ctx.model.Poetry.findAll({
@@ -57,7 +59,8 @@ class HomeService extends Service {
             id: id,
           },
         });
-        return res[0].dataValues;
+        console.log(res);
+        return res[0];
       }
       case 2: {
         const res = await ctx.model.Lunyu.findAll({
@@ -65,7 +68,8 @@ class HomeService extends Service {
             id: id,
           },
         });
-        return res[0].dataValues;
+        console.log(res);
+        return res[0];
       }
       case 3: {
         const res = await ctx.model.Shijing.findAll({
@@ -73,7 +77,8 @@ class HomeService extends Service {
             id: id,
           },
         });
-        return res[0].dataValues;
+        console.log(res);
+        return res[0];
       }
     }
   }

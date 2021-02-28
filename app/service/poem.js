@@ -40,7 +40,7 @@ class PoemService extends Service {
     return {
       like: Boolean(like.length),
       collect: Boolean(collect.length),
-    }
+    };
   }
 
   async like(composition_id, category, status) {
@@ -170,7 +170,7 @@ class PoemService extends Service {
         return res;
       }
       case 3: {
-        const res = await ctx.model.shijing.findAll({
+        const res = await ctx.model.Shijing.findAll({
           where: {
             id: id,
           },
