@@ -82,11 +82,6 @@ class SearchService extends Service {
       where: {
         [Op.or]: [
           {
-            author: {
-              [Op.like]: '%' + searchText + '%',
-            },
-          },
-          {
             title: {
               [Op.like]: '%' + searchText + '%',
             },

@@ -30,4 +30,7 @@ module.exports = (app) => {
 
   // 获取搜索结果
   router.get('/search', controller.search.getSearchResult);
+
+  // 获取诗词音频
+  router.get('/audio', controller.audio.getAudio);
 };
