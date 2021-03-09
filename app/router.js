@@ -33,4 +33,7 @@ module.exports = (app) => {
 
   // 获取诗词音频
   router.get('/audio', controller.audio.getAudio);
+
+  // 提交录音
+  router.post('/record', auth, controller.record.postRecord);
 };

@@ -1,7 +1,11 @@
 const path = require('path');
 
-module.exports = app => {
-  const config = exports = {};
+// exports.multipart = {
+//   fileSize: '50mb',
+// };
+
+module.exports = (app) => {
+  const config = (exports = {});
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = app.name + '_1611132479528_703';
@@ -27,7 +31,7 @@ module.exports = app => {
   //   port: 3306,
   //   database: 'miniprogram',
   //   username: 'root',
-  //   password: '123456', 
+  //   password: '123456',
   // };
 
   config.sequelize = {
@@ -36,7 +40,7 @@ module.exports = app => {
     port: 3306,
     database: 'miniprogram',
     username: 'root',
-    password: '1999125ZZR', 
+    password: '1999125ZZR',
   };
 
   // csrf配置先设定为false
@@ -45,6 +49,11 @@ module.exports = app => {
       enable: false,
     },
   };
+
+  config.multipart = {
+    mode: 'file',
+    fileSize: '50mb',
+  }
 
   return {
     ...config,

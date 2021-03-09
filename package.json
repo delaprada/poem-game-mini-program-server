@@ -7,8 +7,10 @@
     "declarations": true
   },
   "dependencies": {
+    "ali-oss": "^6.13.2",
     "crypto": "^1.0.1",
     "egg": "^2.15.1",
+    "egg-multipart": "^2.10.3",
     "egg-scripts": "^2.11.0",
     "egg-sequelize": "^6.0.0",
     "jwt-simple": "^0.5.6",

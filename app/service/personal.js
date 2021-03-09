@@ -100,6 +100,7 @@ class personalService extends Service {
       where: {
         openid: openid,
       },
+      order: [['record_id', 'DESC']],
     });
 
     return res;

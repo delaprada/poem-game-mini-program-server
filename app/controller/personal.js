@@ -3,6 +3,7 @@ const Controller = require('egg').Controller;
 class personalController extends Controller {
   async getPersonalInfo() {
     const { ctx } = this;
+    ctx.coreLogger.info('请求personal接口');
     const res = await ctx.service.personal.findInfo();
 
     ctx.body = res;
