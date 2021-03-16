@@ -1,9 +1,5 @@
 const path = require('path');
 
-// exports.multipart = {
-//   fileSize: '50mb',
-// };
-
 module.exports = (app) => {
   const config = (exports = {});
 
@@ -25,23 +21,23 @@ module.exports = (app) => {
 
   // 本地数据库密码为1999125ZZR 远程服务器数据库密码为123456
   // sequelize配置
-  // config.sequelize = {
-  //   dialect: 'mysql',
-  //   host: 'localhost',
-  //   port: 3306,
-  //   database: 'miniprogram',
-  //   username: 'root',
-  //   password: '123456',
-  // };
-
   config.sequelize = {
     dialect: 'mysql',
     host: 'localhost',
     port: 3306,
     database: 'miniprogram',
     username: 'root',
-    password: '1999125ZZR',
+    password: '123456',
   };
+
+  // config.sequelize = {
+  //   dialect: 'mysql',
+  //   host: 'localhost',
+  //   port: 3306,
+  //   database: 'miniprogram',
+  //   username: 'root',
+  //   password: '1999125ZZR',
+  // };
 
   // csrf配置先设定为false
   config.security = {

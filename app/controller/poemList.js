@@ -5,8 +5,8 @@ class PoemListController extends Controller {
     const { ctx } = this;
 
     // get请求参数要从query中获取
-    const { category } = ctx.query;
-    const res = await ctx.service.poemList.getPoemList(Number(category));
+    const { category, offset } = ctx.query;
+    const res = await ctx.service.poemList.getPoemList(Number(category), Number(offset));
 
     ctx.body = res;
   }
