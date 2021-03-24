@@ -1,14 +1,49 @@
 const Service = require('egg').Service;
 const { QueryTypes } = require('sequelize');
 
+function isLeapYear(year) {
+  return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+}
+
+//判断天数
+function getDays(year, month, day) {
+  var days = day;
+
+  //天数没有规律,故放在一个数组中
+  var monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  for (var i = 0; i < month; i++) {
+    //传进来的月份,对应的下标是-1的
+    days += monthDays[i];
+  }
+
+  //如果是闰年,天数加一
+  if (isLeapYear(year) && month > 2) {
+    days++;
+  }
+  return days++;
+}
+
 class HomeService extends Service {
   async findSentence() {
     const { app } = this;
 
-    const res = await app.model.query(
-      'SELECT * FROM sentence AS t1  JOIN (SELECT ROUND(RAND() * ((SELECT MAX(id) FROM `sentence`)-(SELECT MIN(id) FROM sentence))+(SELECT MIN(id) FROM sentence)) AS id) AS t2 WHERE t1.id >= t2.id ORDER BY t1.id LIMIT 1',
-      { type: QueryTypes.SELECT }
-    );
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    const pastDays = getDays(year, month, day);
+
+    // 因为目前数据库每日一句只有3条数据，所以%3
+    const res = await app.model.Sentence.findAll({
+      where: {
+        id: pastDays % 3 + 1,
+      },
+    });
+
+    // const res = await app.model.query(
+    //   'SELECT * FROM sentence AS t1  JOIN (SELECT ROUND(RAND() * ((SELECT MAX(id) FROM `sentence`)-(SELECT MIN(id) FROM sentence))+(SELECT MIN(id) FROM sentence)) AS id) AS t2 WHERE t1.id >= t2.id ORDER BY t1.id LIMIT 1',
+    //   { type: QueryTypes.SELECT }
+    // );
 
     return res;
   }
