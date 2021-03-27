@@ -27,17 +27,8 @@ module.exports = (app) => {
     port: 3306,
     database: 'miniprogram',
     username: 'root',
-    password: '123456',
+    password: 'xxx',
   };
-
-  // config.sequelize = {
-  //   dialect: 'mysql',
-  //   host: 'localhost',
-  //   port: 3306,
-  //   database: 'miniprogram',
-  //   username: 'root',
-  //   password: '1999125ZZR',
-  // };
 
   // csrf配置先设定为false
   config.security = {
