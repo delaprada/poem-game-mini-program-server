@@ -8,6 +8,10 @@
 
 - 古诗词数据源来自[chiness-poetry](https://github.com/chinese-poetry/chinese-poetry)开源仓库，以及对应的mysql格式数据[chinese-poetry-mysql](https://github.com/KomaBeyond/chinese-poetry-mysql)开源仓库。以上数据源的诗词均为繁体字，本项目基于数据源对数据进行简体化。
 
+## 体验
+
+![](./images/qrcode.png)
+
 ## 使用
 
 克隆项目到本地：
@@ -81,3 +85,7 @@ npm run dev
 | ![home](./images/userpage.PNG)  | ![home](./images/gamepage.PNG) |![poem](./images/roundpage.PNG)|
 |  选择题   | 填字游戏  | 识别游戏   |
 | ![home](./images/choicegamepage.PNG)  | ![poem](./images/crosswordgamepage.PNG) |![home](./images/identifygamepage.PNG)  |
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
