@@ -19,7 +19,6 @@ module.exports = (app) => {
     dir: path.join(app.baseDir, 'public'),
   };
 
-  // 本地数据库密码为1999125ZZR 远程服务器数据库密码为123456
   // sequelize配置
   config.sequelize = {
     dialect: 'mysql',
