@@ -249,7 +249,7 @@ class personalService extends Service {
         return res;
       }
       case 3: {
-        const res = await ctx.model.shijing.findAll({
+        const res = await ctx.model.Shijing.findAll({
           where: {
             id: id,
           },

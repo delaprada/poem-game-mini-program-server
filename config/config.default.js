@@ -26,7 +26,7 @@ module.exports = (app) => {
     port: 3306,
     database: 'miniprogram',
     username: 'root',
-    password: 'xxx',
+    password: '123456',
   };
 
   // csrf配置先设定为false
