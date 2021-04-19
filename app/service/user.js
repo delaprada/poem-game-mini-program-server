@@ -16,7 +16,7 @@ class UserService extends Service {
 
     // 服务器根据客户端传来的code向微信接口服务获取session_key和openid
     const res = await ctx.curl(
-      `https://api.weixin.qq.com/sns/jscode2session?appid=wx6936c18b38186cf3&secret=d11f77fb7d5a959b6ba46c30dbd4da95&js_code=${code}&grant_type=authorization_code`,
+      `https://api.weixin.qq.com/sns/jscode2session?appid=wx6936c18b38186cf3&secret=xxx&js_code=${code}&grant_type=authorization_code`,
       {
         dataType: 'json',
       }
