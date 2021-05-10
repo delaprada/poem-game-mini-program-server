@@ -5,8 +5,8 @@ let aliInfo = {
   // https://help.aliyun.com/document_detail/31837.html
   region: 'oss-cn-guangzhou',
   bucket: 'poem-mini-program',
-  accessKeyId: 'xxx',
-  accessKeySecret: 'xxx',
+  accessKeyId: '',
+  accessKeySecret: '',
 };
 
 let client = new OSS(aliInfo);
